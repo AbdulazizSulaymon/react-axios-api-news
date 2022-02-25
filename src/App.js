@@ -1,13 +1,20 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import News from "./pages/News";
+import NewsRedux from "./pages/NewsRedux";
+import store from "./redux/store";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<News />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to={"/category/all"} />} />
+          <Route path="/category/:category" element={<NewsRedux />} />
+          <Route path="/category/:category/:id" element={<NewsRedux />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
